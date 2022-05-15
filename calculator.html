@@ -13,9 +13,54 @@
 
 
 
+
+
+
+
   <script>
 
+    const add = function (num1, num2) {
+      return num1 + num2;
+    };
 
+    const subtract = function (num1, num2) {
+      return num1 - num2;
+    };
+
+    const sum = function (...args) {
+      let sum = 0;
+
+      for (let i = 0; i < args[0].length; i++) {
+        sum += args[0][i];
+      }
+
+      return sum;
+    };
+
+    const multiply = function (...args) {
+      let sum = args[0][0];
+
+      for (let i = 1; i < args[0].length; i++) {
+        sum *= args[0][i];
+      }
+
+      return sum;
+    };
+
+    const power = function (base, exponent) {
+      return Math.pow(base, exponent);
+    };
+
+    const factorial = function (n) {
+      if (n === 0 || n === 1) {
+        return 1;
+      }
+      let factorialSum = n;
+      for (let i = n - 1; i >= 1; i--) {
+        factorialSum *= i;
+      }
+      return factorialSum;
+    };
 
 
   </script>
