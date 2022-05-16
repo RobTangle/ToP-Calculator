@@ -44,9 +44,19 @@ button {
   width: 73px;
   height: 73px;
   font-size: large;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(86, 143, 143);
+  transition: 0.2s ease-in-out;
 }
 
 .mas,
-.intro {
+.equal {
   height: 150px;
+}
+
+.equal {
+  background-color: rgb(121, 215, 246);
 }

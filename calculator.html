@@ -64,9 +64,10 @@
     //AL APRETAR un OPERADOR, los numeros ingresados se guardan en la variable num1, y los siguientes numeros apretados se almacenan
     //en la variable num2. AL MISMO TIEMPO, establecer el valor de la variable OPERADOR para que luego pueda ser usado por fn operate();
     //
-    let nums1;
-    let nums2;
 
+    let numsArray = [];
+    let prevNum = "";
+    let operador = "";
 
     let display = document.getElementById('display');
 
@@ -76,14 +77,31 @@
       button.addEventListener('click', (e) => {
         switch (e.target.innerText) {
           case 'C':
+            numsArray = [];
             display.innerText = "";
+            operador = "";
             break;
           case '←':
             display.innerText = display.innerText.slice(0, -1);
             break;
-          case '=':
+          case '-':
+            operador = "-";
+            numsArray.push(display.innerText)
+            display.innerText = "";
+            break;
+          case '+':
+            operador = "+"
+            numsArray.push(display.innerText)
+            display.innerText = "";
+            break;
+
+          case '=':    //que esto ejecute fnc que sea una fnc switch (operadores);
             try {
-              display.innerText = eval(display.innerText)
+              numsArray.push(display.innerText);
+              display.innerText = "";
+              display.innerText = operate(operador)
+              numsArray = [];
+              // numsArray.push(display.innerText)
             } catch {
               display.innerText = "ERROR";
             }
@@ -93,13 +111,15 @@
         }
       })
     })
+
     //2) Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.:
-    function operate(num1, num2, op) {
+    function operate(op) {
+      op = operador
       if (op == "+") {
-        return add(num1, num2);
+        return sum(numsArray);
       }
       if (op == "-") {
-        return subtract(num1, num2);
+        return subtract(numsArray);
       }
       if (op == "*") {
         return num1 * num2;
@@ -115,18 +135,28 @@
 
     ////////////////////////////////
     const add = function (num1, num2) {
-      return num1 + num2;
+      return parseFloat(num1) + parseFloat(num2);
     };
 
-    const subtract = function (num1, num2) {
-      return num1 - num2;
-    };
+    const subtract = function (...args) {
+      let base = args[0][0]
+      for (let i = 1; i < args[0].length; i++) {
+
+        if (args[0][i]) {
+          base -= parseFloat(args[0][i]);
+        }
+      }
+      return base
+    }
+
 
     const sum = function (...args) {
       let sum = 0;
 
       for (let i = 0; i < args[0].length; i++) {
-        sum += args[0][i];
+        if (args[0][i]) {
+          sum += parseFloat(args[0][i]);
+        }
       }
 
       return sum;
