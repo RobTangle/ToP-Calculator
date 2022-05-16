@@ -1,0 +1,9 @@
+.calculadora {
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  border: solid;
+  border-width: 1px;
+}
