@@ -84,6 +84,16 @@
           case '←':
             display.innerText = display.innerText.slice(0, -1);
             break;
+          case '/':
+            operador = "/";
+            numsArray.push(display.innerText)
+            display.innerText = "";
+            break;
+          case '*':
+            operador = "*";
+            numsArray.push(display.innerText)
+            display.innerText = "";
+            break;
           case '-':
             operador = "-";
             numsArray.push(display.innerText)
@@ -122,10 +132,10 @@
         return subtract(numsArray);
       }
       if (op == "*") {
-        return num1 * num2;
+        return multiply(numsArray);
       }
       if (op == "/") {
-        return num1 / num2;
+        return divide(numsArray);
       }
       if (op == false) {
         return "Ingrese un operador válido";
@@ -171,6 +181,17 @@
 
       return sum;
     };
+
+    const divide = function (...args) {
+      let sum = args[0][0];
+
+      for (let i = 1; i < args[0].length; i++) {
+        sum /= args[0][i];
+      }
+
+      return sum;
+
+    }
 
     const power = function (base, exponent) {
       return Math.pow(base, exponent);
