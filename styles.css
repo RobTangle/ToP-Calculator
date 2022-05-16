@@ -11,6 +11,10 @@ div {
   border-width: 1px;
 }
 
+#display {
+  height: 73px;
+}
+
 .teclado {
   display: flex;
   flex-direction: row;

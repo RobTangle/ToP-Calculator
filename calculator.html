@@ -13,7 +13,7 @@
   <h1>Calculator - ToP</h1>
 
   <div class="calculadora">
-    <div class="display">DISPLAY</div>
+    <div id="display"></div>
     <span class="teclado">
       <span class="teclado-main">
         <div id="f1">
@@ -37,7 +37,7 @@
           <button class="3">3</button>
         </div>
         <div id="f5">
-          <button class="borrar">&lt;-</button>
+          <button class="borrar">&larr;</button>
           <button class="0">0</button>
           <button class="punto">.</button>
         </div>
@@ -45,7 +45,7 @@
       <div id="right-column">
         <button class="menos">-</button>
         <button class="mas">+</button>
-        <button class="intro">Intro</button>
+        <button class="equal">=</button>
       </div>
     </span>
   </div>
@@ -57,9 +57,60 @@
 
 
   <script>
-    //2) Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.:
-    function operate(num1, num2) {
+    // Make the calculator work! You’ll need to store the first number that is input into the calculator when a user presses an operator, and also save which operation has been chosen and then operate() on them when the user presses the “=” key.
 
+    //CREAR variable que almacene los numeros que se apretan en los botones. Puedo hacer que tome el valor de la CLASS
+    //CREAR variable OPERADOR. Va a tomar el valor del BOTÓN OPERADOR APRETADO ("+", "-", "*", "/");
+    //AL APRETAR un OPERADOR, los numeros ingresados se guardan en la variable num1, y los siguientes numeros apretados se almacenan
+    //en la variable num2. AL MISMO TIEMPO, establecer el valor de la variable OPERADOR para que luego pueda ser usado por fn operate();
+    //
+    let nums1;
+    let nums2;
+
+
+    let display = document.getElementById('display');
+
+    let buttons = Array.from(document.getElementsByTagName('button'));
+
+    buttons.map(button => {
+      button.addEventListener('click', (e) => {
+        switch (e.target.innerText) {
+          case 'C':
+            display.innerText = "";
+            break;
+          case '←':
+            display.innerText = display.innerText.slice(0, -1);
+            break;
+          case '=':
+            try {
+              display.innerText = eval(display.innerText)
+            } catch {
+              display.innerText = "ERROR";
+            }
+            break;
+          default:
+            display.innerText += e.target.innerText;
+        }
+      })
+    })
+    //2) Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.:
+    function operate(num1, num2, op) {
+      if (op == "+") {
+        return add(num1, num2);
+      }
+      if (op == "-") {
+        return subtract(num1, num2);
+      }
+      if (op == "*") {
+        return num1 * num2;
+      }
+      if (op == "/") {
+        return num1 / num2;
+      }
+      if (op == false) {
+        return "Ingrese un operador válido";
+      }
+      return "Ingrese en forma de string un operador válido"
     }
 
     ////////////////////////////////
